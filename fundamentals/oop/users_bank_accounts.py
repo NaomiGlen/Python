@@ -71,6 +71,23 @@ class BankAccount:
         else:
             return True
 
+class CheckingAccount(BankAccount):
+    def __init__(self, int_rate, balace=0):
+        super().__init__(int_rate, balace)
+    def write_check(self, amount):
+        pass
+
+class RetirementAccount(BankAccount):
+    def __init__(self, int_rate, is_roth, balance = 0):
+        super().__init__(int_rate, balance)
+        self.is_roth = is_roth
+    def withdraw(self, amount, is_early):
+        if is_early:
+            amount = amount * 1.10
+        super().withdraw(amount)
+        return self
+
+
 user1 = User("Naomi", "naomi@email.com")
 user1.make_deposit(2500,account_name="checking").make_deposit(500,account_name="savings").display_user_balance()
 
