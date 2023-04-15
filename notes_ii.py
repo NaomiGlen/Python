@@ -48,3 +48,60 @@ class User:
             self.price -= amount
         else:
             print("Price deduction too large")
+
+##ERD/SQL
+
+#Examples of One-to-One
+#Customers and Credit Cards - 
+#Every Customer has one Credit Card, 
+#every Credit Card belongs to one Customer.
+
+#User and Email - Every User has one Email Address,
+# every Email Address has one User.
+
+#Product and Image - Every Product has an Image,
+# every Image is of a Product.
+
+#Examples of One-to-Many
+#Messages and Comments - 
+# One Comment belongs to one Message, 
+#but one Message can have many Comments.
+
+#States and Cities - One City is only in one State,
+#but one State can have many Cities.
+
+#Customers and Orders - One Order only has one Customer,
+#but one Customer can have many Orders.
+
+#Examples of Many-to-Many
+#Users and Interests - One User can have many Interests,
+#one Interest can be applied to many Users.
+
+#Actors and Movies - One Movie can have many Actors,
+# one Actor can be in many Movies.
+
+#Businesses and Cities - One Business can be spread across 
+#many Cities, one City can be home to many Businesses.
+
+#MySQL
+#Select all method - selecting data from a table
+#SELECT *(all) FROM (table_name);
+#Select one method
+#SELECT (column) FROM (table_name);
+#Select with conditionals
+#SELECT *(all) FROM (table_name) WHERE (column) = (value)
+#Select with sorting
+#SELECT *(all) FROM (table_name) ORDER BY (value) DESC(descending)/ASC(ascending);
+
+
+#Insert method - inserting(adding) data to a table
+#INSERT INTO table_name (column_name1, column_name2) 
+#VALUES('column1_value', 'column2_value');
+
+#Update records method - updating information in a table
+#UPDATE table_name
+#SET column1 = value1, column2 = value, ...
+#WHERE condition;
+
+#Delete records method - IMPORTANT! if WHERE condition is not added to the DELETE statement, it will delete all the records on the table.
+#DELETE FROM table_name WHERE condition;

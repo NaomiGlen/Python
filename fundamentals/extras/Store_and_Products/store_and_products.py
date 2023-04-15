@@ -10,14 +10,7 @@ class Store:
         return self
     def sell_product(self,id):
         pass
-    def inflation(self,percent_increase):
-        self.products = self.products * (1+percent_increase)
-        return self
-    def set_clearance(self,category,percent_discout):
-        self.category = self.category *(1-percent_discout)
-        return self
-    def show_all_products(self):
-        print(self.products)
+
 
 class Product:
     def __init__(self, product_name, price, category):
@@ -54,5 +47,3 @@ bananas.print_info()
 
 chicken.update_price(0.10,False)
 chicken.print_info()
-
-Store.inflation(0.1)
