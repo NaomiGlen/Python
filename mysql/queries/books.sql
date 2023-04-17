@@ -1,0 +1,1 @@
+SELECT * FROM users JOIN favorites on favorites.user_id = users.id WHERE favorites.book_id=5;
