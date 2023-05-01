@@ -105,3 +105,17 @@ class User:
 
 #Delete records method - IMPORTANT! if WHERE condition is not added to the DELETE statement, it will delete all the records on the table.
 #DELETE FROM table_name WHERE condition;
+
+#When we call on the database connection to execute the query, 
+#we will pass both the query and the dictionary, like so:
+query = "UPDATE friends SET first_name=%(fn)s WHERE id=%(id_num)s;"
+data = {
+    "fn": #possibly a value from a form,
+    "id_num": #possibly a value from the url,
+}
+mysql.query_db(query,data)
+#connection to the db - mysql - the instance of the MySQLConnection class
+#query string - "INSERT INTO_"lthe string that will eventually be executed on our MySQL server
+#data dictionary - the values that will be interpolated into the query string
+#data dictionary keys - fn, id_num - the keys of the data dictionary used in the query 
+#   string with %-interpolation (i.e.%(key_name)s)
