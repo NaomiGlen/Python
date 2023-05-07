@@ -16,4 +16,19 @@ class Ninja:
                 INSERT INTO ninjas (first_name,last_name,age,created_at,updated_at)
                 VALUES (%(first_name)s,%(last_name)s,%(age)s,NOW(),NOW())
                 """
-        return connectToMySQL('ninjas').query_db(query,data)
+        return connectToMySQL('dojos_and_ninjas_schema').query_db(query,data)
+    
+    @classmethod
+    def get_all(cls):
+        query = "SELECT * FROM ninjas;"
+        ninjas_from_db = connectToMySQL('dojos_and_ninjas_schema').query_db(query)
+        ninjas = []
+        for n in ninjas_from_db:
+            ninjas.append(cls(n))
+        return ninjas
+
+    @classmethod
+    def get_one(cls,data):
+        query = "SELECT * FROM ninjas WHERE ninjas.id = %(id)s;"
+        ninja_from_db = connectToMySQL('dojos_and_ninjas_schema').query_db(query,data)
+        return cls(ninja_from_db[0])

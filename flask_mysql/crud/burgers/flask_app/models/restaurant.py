@@ -16,6 +16,7 @@ class Restaurant:
                 VALUES (%(name)s,NOW(),NOW());
                 """
         return connectToMySQL('burgers').query_db(query,data)
+
     @classmethod
     def get_restaurant_with_burgers(cls,data):
         query = """
