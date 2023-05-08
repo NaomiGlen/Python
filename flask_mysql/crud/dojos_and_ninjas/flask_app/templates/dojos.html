@@ -20,9 +20,9 @@
         </form>
         <div class="flex p-3 col-3 mx-auto my-5 bg-dark text-light rounded">
             <h1 class="text-center text-primary">All Dojos</h1>
-            <div class="flex justify-content-center p-3 mx-auto rounded mb-3 border">
-                {% for dojo in dojos %}
-                <a href="/show/{{dojo['id']}}">{{dojo['name']}}</a>
+            <div class="flex list-group text-center mx-auto rounded mb-3 border">
+                {% for dojo in all_dojos %}
+                <a href="/show/{{dojo['id']}}" class="flex mx-auto col-3 text-warning">{{dojo['name']}}</a>
                 {% endfor %}
             </div>
             <a href="/new/ninja" class="btn btn-primary rounded">Add a Ninja</a>

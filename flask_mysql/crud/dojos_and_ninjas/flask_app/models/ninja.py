@@ -32,3 +32,4 @@ class Ninja:
         query = "SELECT * FROM ninjas WHERE ninjas.id = %(id)s;"
         ninja_from_db = connectToMySQL('dojos_and_ninjas_schema').query_db(query,data)
         return cls(ninja_from_db[0])
+

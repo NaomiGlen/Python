@@ -1,13 +1,15 @@
 from flask_app import app
 from flask import render_template,redirect,request,session
 from flask_app.models.burger import Burger
+from flask_app.models.restaurant import Restaurant
+from flask_app.models.topping import Topping
 
 @app.route('/')
 def index():
     return render_template("index.html")
 
-@app.route('/create',methods=['POST'])
-def create():
+@app.route('/create/burger',methods=['POST'])
+def create_burger():
     data = {
         "name":request.form['name'],
         "bun": request.form['bun'],
@@ -19,7 +21,7 @@ def create():
 
 @app.route('/burgers')
 def burgers():
-    return render_template("results.html",all_burgers=Burger.get_all())
+    return render_template("results.html",burgers=Burger.get_all())
 
 @app.route('/show/<int:burger_id>')
 def detail_page(burger_id):

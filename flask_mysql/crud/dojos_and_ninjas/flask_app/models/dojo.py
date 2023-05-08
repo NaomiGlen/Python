@@ -37,14 +37,18 @@ class Dojo:
         results = connectToMySQL('dojos_and_ninjas_schema').query_db(query,data)
         dojo = cls(results[0])
         for row_from_db in results:
-            ninja_data = {
-                "id" : row_from_db["ninjas.id"],
-                "first_name" : row_from_db["ninjas.first_name"],
-                "last_name" : row_from_db["ninjas.last_name"],
-                "age" : row_from_db["ninjas.age"],
-                "dojo_id" : row_from_db["ninjas.dojo_id"],
-                "created_at" : row_from_db["ninjas.created_at"],
-                "updated_at" : row_from_db["ninjas.updated_at"]
+            dojo_ninjas = {
+                "id" : row_from_db["id"],
+                "name" : row_from_db["name"],
+                "created_at" : row_from_db["created_at"],
+                "updated_at" : row_from_db["updated_at"],
+                "ninjas_id" : row_from_db["ninjas.id"],
+                "first_name" : row_from_db["first_name"],
+                "last_name" : row_from_db["last_name"],
+                "age" : row_from_db["age"],
+                "dojo_id" : row_from_db["dojo_id"],
+                "ninjas.created_at" : row_from_db["ninjas.created_at"],
+                "ninjas.updated_at" : row_from_db["ninjas.updated_at"]
             }
-            dojo.ninjas.append(ninja.Ninja(ninja_data))
+            dojo.ninjas.append(ninja.Ninja(dojo_ninjas))
         return dojo

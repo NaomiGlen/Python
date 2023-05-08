@@ -11,29 +11,24 @@
 <body>
     <form action="/create/burger" method="post" class="p-3 col-4 mx-auto my-5 bg-dark text-light">
         <h2 class="text-center text-primary">Create Burger:</h2>
-    
-        <div class="form-group">
+        <div class="form-group p-1">
             <label for="name">Burger Name:</label>
             <input type="text" name="name" id="name" class="form-control">
-        </div>
-        <div class="form-group">
             <label for="bun">Bun:</label>
             <input type="text" name="bun" id="bun" class="form-control">
-        </div>
-        <div class="form-group">
             <label for="meat">Meat:</label>
             <input type="text" name="meat" id="meat" class="form-control">
-        </div>
-        <div class="form-group">
             <label for="calories">Calories:</label>
             <input type="number" min="0" name="calories" id="calories" class="form-control">
-        </div>
-        <div class="form-group">
-            <select name="restaurant_id">
+            <div class="my-3">
+                <label>Restaurant:</label>
+                <select name="restaurant_id" class="rounded form-control">
                 {% for restaurant in all_restaurants %}
-                    <option value="{{restaurant.id}}>{{restaurant.name}}" class="rounded">Select a Restaurant</option>
+                <option selected>Select a Restaurant</option>
+                <option value={{restaurant.id}}>{{restaurant.name}}</option>
                 {% endfor %}
-            </select>
+                </select>
+            </div>
         </div>
         <input type="submit" value="Create Burger" class="btn btn-success text-light btn-outline-dark">
         <a href="/burgers" class="btn btn-primary">See all burgers</a>
