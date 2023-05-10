@@ -1,8 +1,10 @@
 from flask_app.config.mysqlconnection import connectToMySQL
+from flask import flash
 import re
 
-EMAIL_REGEX = re.compiler('^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+EMAIL_REGEX = re.compile('^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 class User:
+    DB = "users_schema"
     def __init__(self,data):
         self.id=data['id']
         self.first_name=data['first_name']
@@ -15,15 +17,29 @@ class User:
         return f"{self.first_name} {self.last_name}"
 
     @classmethod
+    def is_valid_user(cls,user):
+        is_valid = True
+        for field in user:
+            if len(user[field]) <= 0:
+                is_valid = False
+                message = f"{field} is required.".capitalize()
+                make_pretty = message.maketrans("_", " ")
+                flash(message.translate(make_pretty))
+        if len(user["email"]) > 0 and not EMAIL_REGEX.match(user['email']):
+            flash("Invalid email format.")
+            is_valid = False
+        return is_valid
+
+    @classmethod
     def get_one(cls,data):
         query = "SELECT * FROM users WHERE id = %(id)s;"
-        result = connectToMySQL('users_schema').query_db(query,data)
+        result = connectToMySQL(cls.DB).query_db(query,data)
         return cls(result[0])
 
     @classmethod
     def get_all(cls):
         query="SELECT * FROM users;"
-        results=connectToMySQL('users_schema').query_db(query)
+        results=connectToMySQL(cls.DB).query_db(query)
         users=[]
         for x in results:
             users.append(cls(x))
@@ -35,7 +51,7 @@ class User:
                 INSERT INTO users(first_name,last_name,email)
                 VALUES (%(first_name)s,%(last_name)s, %(email)s);
                 """
-        result=connectToMySQL('users_schema').query_db(query,data)
+        result=connectToMySQL(cls.DB).query_db(query,data)
         return result
 
     @classmethod
@@ -44,12 +60,12 @@ class User:
                 SET first_name=%(first_name)s,last_name=%(last_name)s, email=%(email)s
                 WHERE id = %(id)s;
                 """
-        return connectToMySQL('users_schema').query_db(query,data)
+        return connectToMySQL(cls.DB).query_db(query,data)
 
     @classmethod
     def delete(cls,data):
         query = "DELETE FROM users WHERE id = %(id)s;"
-        return connectToMySQL('users_schema').query_db(query,data)
+        return connectToMySQL(cls.DB).query_db(query,data)
 
 @staticmethod
 def validate_user(user):
