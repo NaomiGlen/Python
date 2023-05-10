@@ -36,7 +36,7 @@ class Author:
     @classmethod
     def add_favorite(cls,data):
         query = "INSERT INTO favorites (author_id,book_id) VALUES (%(author_id)s,%(book_id)s);"
-        return connectToMySQL('books_schema').query_db(query,data);
+        return connectToMySQL('books_schema').query_db(query,data)
 
     @classmethod
     def get_by_id(cls,data):

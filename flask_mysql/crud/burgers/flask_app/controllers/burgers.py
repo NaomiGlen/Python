@@ -16,6 +16,8 @@ def create_burger():
         "meat": request.form['meat'],
         "calories": request.form['calories']
     }
+    if not Burger.validate_burger(request.form):
+        return redirect('/')
     Burger.save(data)
     return redirect('/burgers')
 
