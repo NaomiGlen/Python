@@ -1,14 +1,12 @@
 from flask_app import app
-from flask import render_template,redirect,request,session
+from flask import render_template,redirect,flash,request,session
 from flask_app.models.user import User
 
 @app.route('/')
-def index():
-    return redirect('/users')
-
-@app.route('/users')
 def users():
-    return render_template("users.html",users=User.get_all())
+    friends = User.get_all()
+    print(friends)
+    return render_template("users.html", all_friends = friends)
 
 @app.route('/user/new')
 def new():
@@ -16,9 +14,13 @@ def new():
 
 @app.route('/user/create',methods=['POST'])
 def create():
-    print(request.form)
-    User.save(request.form)
-    return redirect('/users')
+    user_info = request.form
+    if User.is_valid_user(user_info):
+        User.save(user_info)
+        print("Pass")
+        return redirect('/')
+    print("FAIL")
+    return redirect('/user/new')
 
 @app.route('/user/show/<int:id>')
 def show(id):
@@ -45,7 +47,7 @@ def delete(id):
         'id': id
     }
     User.delete(data)
-    return redirect('/users')
+    return redirect('/user')
 
 @app.route('/register', methods=['POST'])
 def register():
