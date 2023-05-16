@@ -35,8 +35,8 @@ class User:
     @classmethod
     def save(cls,data):
         query = """
-                INSERT INTO users(first_name,last_name,email)
-                VALUES (%(first_name)s,%(last_name)s, %(email)s);
+                INSERT INTO users(username, password)
+                VALUES (%(username)s,%(password)s);
                 """
         result=connectToMySQL(cls.db).query_db(query,data)
         return result
@@ -67,6 +67,15 @@ class User:
             flash("Invalid email format.")
             is_valid = False
         return is_valid
+
+    @classmethod
+    def get_by_email(cls,data):
+        query = "SELECT * FROM users WHERE email = %(email)s;"
+        result = connectToMySQL("mydb").query_db(query,data)
+        # Didn't find a matching user
+        if len(result) < 1:
+            return False
+        return cls(result[0])
 
     @staticmethod
     def validate_user(user):
