@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Sasquatch Websighting</title>
+</head>
+<body>
+    <div class="container row justify-content-between mx-auto mt-3 bg-dark text-light rounded">
+        <div class="row">
+            <h2 class="p-0 col-6">Sasquatch Websighting</h2>
+            <h2 class="p-0 col-6">{{user.first_name}} {{user.last_name}}</h2>
+        </div>
+        <div class="row justify-content-end">
+            <a href="/dashboard" class="btn btn-primary col-2 mt-3" style="height: 70%;">Return to Dashboard</a>
+        </div>
+        <div class="row justify-content-end">
+            <a href="/user/logout" class="btn btn-danger col-1 mt-3" style="height: 70%">Logout</a>
+        </div>
+        <div class="row mb-3">
+            <h1 class="fs-3 col-12">{{sighting.location}} on {{sighting.sight_date}}</h1>
+            <h2 class="fs-3 col-6">What happened:</h2>
+            <p class="fs-3 col-12">{{sighting.content}}</p>
+            <h3 class="fs-3 col-12"># of Sasquatches: {{sighting.num_sasquatch}}</h3>
+            <h4 class="fs-3 col-12">Reported By: {{sighting.reporter.first_name}} {{sighting.reporter.last_name}}</h4>
+        </div>
+    </div>
+</body>
+</html>

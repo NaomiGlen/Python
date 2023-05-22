@@ -64,11 +64,11 @@ class User:
                 message = f"{field} is required!".capitalize()
                 make_pretty = message.maketrans("_"," ")
                 flash(message.translate(make_pretty),"register")
-            if len(results) >= 1:
-                flash("Email already exists!","register")
-                is_valid = False
             if len(form_data['email']) > 0 and not EMAIL_REGEX.match(form_data['email']):
                 flash("Invalid email!","register")
+                is_valid = False
+            elif User.get_by_email(form_data):
+                flash("Email already exists!","register")
                 is_valid = False
             if len(form_data['first_name']) < 3:
                 flash("First name must be at least 3 characters long!","register")
